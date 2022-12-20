@@ -7,6 +7,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 import {FlatList} from 'react-native-gesture-handler';
 import {FadeInImage} from '../components/FadeInImage';
+import {PokemonCard} from '../components/PokemonCard';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
@@ -21,9 +22,22 @@ export const HomeScreen = () => {
       <FlatList
         data={simplePokemonList}
         keyExtractor={(pokemon, index) => pokemon.id + index}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
+        ListHeaderComponent={
+          <Text
+            style={{
+              ...globalStyles.title,
+              ...globalStyles.margin,
+              top: top + 20,
+              marginBottom: top + 20,
+            }}>
+            Pokedex
+          </Text>
+        }
         renderItem={({item}) => (
-          <FadeInImage uri={item.picture} style={{width: 100, height: 100}} />
+          // <FadeInImage uri={item.picture} style={{width: 100, height: 100}} />
+          <PokemonCard pokemon={item} />
         )}
         onEndReached={loadPokemons}
         onEndReachedThreshold={0.4}
