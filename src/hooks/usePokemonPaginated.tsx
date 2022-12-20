@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {useEffect, useRef, useState} from 'react';
 import {pokemonAPi} from '../api/pokemonApi';
 import {
@@ -8,15 +9,18 @@ import {
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const usePokemonPaginated = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [simplePokemonList, setSimplePokemonList] = useState<SimplePokemon[]>(
     [],
   );
   const nextPageUrl = useRef('https://pokeapi.co/api/v2/pokemon?limit=40');
 
   const loadPokemons = async () => {
+    setIsLoading(true);
     const resp = await pokemonAPi.get<PokemonPaginatedResponse>(
       nextPageUrl.current,
     );
+    nextPageUrl.current = resp.data.next;
     mapPokemonListToSimplePokemon(resp.data.results);
   };
 
@@ -29,11 +33,12 @@ export const usePokemonPaginated = () => {
       return {id, picture, name};
     });
     setSimplePokemonList([...simplePokemonList, ...newPokemonList]);
+    setIsLoading(false);
   };
 
   useEffect(() => {
     loadPokemons();
-  });
+  }, []);
 
-  return {};
+  return {isLoading, simplePokemonList, loadPokemons};
 };
