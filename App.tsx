@@ -1,12 +1,14 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const App = () => {
   return (
-    <View>
+    <>
       <Text>App</Text>
-    </View>
+      <Icon name="star-outline" color="black" size={30} />
+    </>
   );
 };
 
