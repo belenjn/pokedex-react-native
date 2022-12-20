@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/self-closing-comp */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -10,6 +12,7 @@ import {
 } from 'react-native';
 import {SimplePokemon} from '../interfaces/pokemonInterfaces';
 import {FadeInImage} from './FadeInImage';
+import ImageColors from 'react-native-image-colors';
 
 interface Props {
   pokemon: SimplePokemon;
@@ -18,12 +21,23 @@ interface Props {
 const windowWidth = Dimensions.get('window').width;
 
 export const PokemonCard = ({pokemon}: Props) => {
+  const [bgColor, setBgColor] = useState('grey');
+  useEffect(() => {
+    ImageColors.getColors(pokemon.picture, {fallback: 'grey'}).then(
+      (colors: any) => {
+        colors.platform === 'android'
+          ? setBgColor(colors.dominant || 'grey')
+          : setBgColor(colors.background || 'grey');
+      },
+    );
+  }, []);
   return (
     <TouchableOpacity activeOpacity={0.9}>
       <View
         style={{
           ...styles.cardContainer,
           width: windowWidth * 0.4,
+          backgroundColor: bgColor,
         }}>
         <View>
           <Text style={styles.name}>
@@ -46,7 +60,6 @@ export const PokemonCard = ({pokemon}: Props) => {
 const styles = StyleSheet.create({
   cardContainer: {
     marginHorizontal: 10,
-    backgroundColor: 'grey',
     height: 120,
     marginBottom: 25,
     borderRadius: 10,
@@ -79,7 +92,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     overflow: 'hidden',
-    opacity: 0.15,
+    opacity: 0.2,
     transform: [{scaleX: -1}],
   },
   picture: {
