@@ -1,3 +1,4 @@
+/* eslint-disable curly */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/self-closing-comp */
@@ -13,6 +14,7 @@ import {
 import {SimplePokemon} from '../interfaces/pokemonInterfaces';
 import {FadeInImage} from './FadeInImage';
 import ImageColors from 'react-native-image-colors';
+import {useRef} from 'react';
 
 interface Props {
   pokemon: SimplePokemon;
@@ -22,14 +24,19 @@ const windowWidth = Dimensions.get('window').width;
 
 export const PokemonCard = ({pokemon}: Props) => {
   const [bgColor, setBgColor] = useState('grey');
+  const isMounted = useRef(true);
   useEffect(() => {
     ImageColors.getColors(pokemon.picture, {fallback: 'grey'}).then(
       (colors: any) => {
+        if (!isMounted) return;
         colors.platform === 'android'
           ? setBgColor(colors.dominant || 'grey')
           : setBgColor(colors.background || 'grey');
       },
     );
+    return () => {
+      isMounted.current = false;
+    };
   }, []);
   return (
     <TouchableOpacity activeOpacity={0.9}>
