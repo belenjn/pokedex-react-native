@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   name: {
-    color: 'white',
+    color: '#494949',
     fontSize: 20,
     fontWeight: 'bold',
     top: 20,
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     overflow: 'hidden',
-    opacity: 0.2,
+    opacity: 0.15,
     transform: [{scaleX: -1}],
   },
   picture: {
