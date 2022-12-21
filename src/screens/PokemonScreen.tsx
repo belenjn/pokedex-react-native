@@ -45,7 +45,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
           source={require('../assets/pokebola-blanca.png')}
           style={styles.pokeball}
         />
-        <FadeInImage uri={picture} style={styles.pokemonImage}/>
+        <FadeInImage uri={picture} style={styles.pokemonImage} />
       </View>
     </View>
   );
@@ -69,10 +69,10 @@ const styles = StyleSheet.create({
     left: 20,
   },
   pokeball: {
-    width: 250,
-    height: 250,
+    width: 230,
+    height: 230,
     alignSelf: 'center',
-    bottom: -25,
+    bottom: -40,
     opacity: 0.4,
   },
   pokemonImage: {
