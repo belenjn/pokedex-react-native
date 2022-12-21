@@ -4,10 +4,10 @@ import React from 'react';
 import {ActivityIndicator, Image, Text, View} from 'react-native';
 import {globalStyles} from '../theme/appTheme';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 import {FlatList} from 'react-native-gesture-handler';
 import {FadeInImage} from '../components/FadeInImage';
 import {PokemonCard} from '../components/PokemonCard';
+import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
