@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/self-closing-comp */
 import React, {useState, useEffect} from 'react';
@@ -8,13 +9,16 @@ import {useDebounceValue} from '../hooks/useDebounceValue';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  onDebounce: (value: string) => void;
 }
 
-export const SearchInput = ({style: globalStyle}: Props) => {
+export const SearchInput = ({style: globalStyle, onDebounce}: Props) => {
   const [textValue, setTextValue] = useState('');
   const debouncedValue = useDebounceValue(textValue);
 
-  useEffect(() => {}, [debouncedValue]);
+  useEffect(() => {
+    onDebounce(debouncedValue!);
+  }, [debouncedValue]);
 
   return (
     <View style={{...styles.container, ...(globalStyle as any)}}>
