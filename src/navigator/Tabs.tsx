@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Navigator} from './Navigator';
+import {Tab1} from './Tab1';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Platform} from 'react-native';
 import {Tab2Screen} from './Tab2';
@@ -29,7 +29,7 @@ export const Tabs = () => {
       }}>
       <Tab.Screen
         name="HomeScreen"
-        component={Navigator}
+        component={Tab1}
         options={{
           tabBarLabel: 'List',
           tabBarIcon: ({color}) => (
