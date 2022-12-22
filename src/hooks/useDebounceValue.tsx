@@ -15,4 +15,5 @@ export const useDebounceValue = (input: string = '', time: number = 500) => {
       clearTimeout(timeOut);
     };
   }, [input]);
+  return debouncedValue;
 };
